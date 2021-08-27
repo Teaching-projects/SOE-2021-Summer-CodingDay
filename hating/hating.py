@@ -3,9 +3,13 @@ import random
 
 d = json.load(open('data.json'))
 connections = d["connections"]
-letters = d["basic letters"]
 
-def getHate(a: str, b: str):
+def init() -> list:
+    s = d["basic letters"]
+    random.shuffle(s)
+    return s
+
+def getHate(a: str, b: str) -> int:
     """
     >>> getHate("C", "E")
     14
@@ -17,7 +21,7 @@ def getHate(a: str, b: str):
             return con["value"]
     return 0
 
-def fitness(genom): 
+def fitness(genom) -> int: 
     """
     >>> fitness(["A", "B", "C", "D", "E"])
     8
@@ -27,7 +31,7 @@ def fitness(genom):
         sum += getHate(genom[i], genom[i+1])
     return sum
 
-def mutate(genom):
+def mutate(genom) -> list:
     r,r2 = (random.randint(0,len(genom)-1),random.randint(0,len(genom)-1))
     while r == r2:
         rand2 = random.randint(0,len(genom)-1)
