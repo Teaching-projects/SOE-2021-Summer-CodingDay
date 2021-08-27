@@ -6,7 +6,6 @@ f = json.load(open('hating/data.json'))
 data = f["basic letters"]
 data2 = ["A", "D", "C", "B", "E"]
 
-
 def mutate(genom):
     r, r2 = (random.randint(0, len(genom)-1), random.randint(0, len(genom)-1))
     while r == r2:
@@ -17,7 +16,6 @@ def mutate(genom):
 
     return genom
 
-
 def crossover(genom, genom2):
     new_genom = genom[:2]
 
@@ -27,6 +25,17 @@ def crossover(genom, genom2):
             new_genom.append(genom2[r])
 
     return new_genom
+
+def init() -> list:
+    s = f["basic letters"]
+    random.shuffle(s)
+    return s[:]
+
+def init_gen():
+    list = []
+    for _ in range(100):
+        list.append(init())
+    return list
 
 
     
