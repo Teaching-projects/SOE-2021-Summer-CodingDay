@@ -8,8 +8,8 @@ def getHate(a: str, b: str):
     """
     >>> getHate("C", "E")
     14
-    >>> getHate("C", "E")
-    14
+    >>> getHate("C", "A")
+    11
     """
     for con in connections:
         if {a, b} == set(con["letters"]):
