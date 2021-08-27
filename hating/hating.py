@@ -1,5 +1,6 @@
 import json
-from os import rename
+import random
+
 d = json.load(open('data.json'))
 connections = d["connections"]
 letters = d["basic letters"]
@@ -25,6 +26,16 @@ def fitness(genom):
     for i in range(len(genom) - 1):
         sum += getHate(genom[i], genom[i+1])
     return sum
+
+def mutate(genom):
+    r,r2 = (random.randint(0,len(genom)-1),random.randint(0,len(genom)-1))
+    while r == r2:
+        rand2 = random.randint(0,len(genom)-1)
+    swap = genom[r]
+    genom[r] = genom[r2]
+    genom[r2] = swap
+ 
+    return genom
 
 if __name__ == "__main__":
     import doctest
