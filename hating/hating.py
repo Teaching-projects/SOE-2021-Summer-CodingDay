@@ -25,6 +25,10 @@ def fitness(genom) -> int:
     """
     >>> fitness(["A", "B", "C", "D", "E"])
     8
+    >>> fitness(["A", "C", "B", "D", "E"])
+    24
+    >>> fitness(["E", "B", "D", "C", "A"])
+    19
     """
     sum = 0
     for i in range(len(genom) - 1):
@@ -50,6 +54,15 @@ def crossover(genom, genom2):
             new_genom.append(genom2[r])
 
     return new_genom
+
+def sort(genom_list: list):
+    """
+    >>> l = [["A", "B", "C", "D", "E"], ["A", "C", "B", "D", "E"], ["E", "B", "D", "C", "A"]]
+    >>> sort(l)
+    >>> l
+    [['A', 'B', 'C', 'D', 'E'], ['E', 'B', 'D', 'C', 'A'], ['A', 'C', 'B', 'D', 'E']]
+    """
+    genom_list.sort(key=fitness)
 
 if __name__ == "__main__":
     import doctest
