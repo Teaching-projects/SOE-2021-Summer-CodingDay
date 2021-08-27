@@ -1,18 +1,31 @@
 import json
+from os import rename
+d = json.load(open('data.json'))
+connections = d["connections"]
+letters = d["basic letters"]
 
-class Genom:
-    def __init__(self) -> None:
-        d = json.load(open('data.json'))
-        self.connections = d["connections"]
-        self.letters = d["basic letters"]
+def getHate(a: str, b: str):
+    """
+    >>> getHate("C", "E")
+    14
+    >>> getHate("C", "E")
+    14
+    """
+    for con in connections:
+        if {a, b} == set(con["letters"]):
+            return con["value"]
+    return 0
 
-    def getHate(self, a: str, b: str):
-        for con in self.connections:
-            if {a, b} == set(con["letters"]) and len(set(con["letters"])) == 2:
-                return con["value"]
+def fitness(genom): 
+    """
+    >>> fitness(["A", "B", "C", "D", "E"])
+    8
+    """
+    sum = 0
+    for i in range(len(genom) - 1):
+        sum += getHate(genom[i], genom[i+1])
+    return sum
 
-    def fitness(self): 
-        pass
-
-g = Genom()
-print(g.getHate("A", "B"))
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()
