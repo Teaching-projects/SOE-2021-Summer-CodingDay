@@ -1,13 +1,19 @@
 import json
 import random
 
-d = json.load(open('data.json'))
+d = json.load(open('hating/data.json'))
 connections = d["connections"]
 
 def init() -> list:
     s = d["basic letters"]
     random.shuffle(s)
-    return s
+    return s[:]
+
+def init_gen():
+    list = []
+    for _ in range(100):
+        list.append(init())
+    return list
 
 def getHate(a: str, b: str) -> int:
     """
@@ -29,6 +35,8 @@ def fitness(genom) -> int:
     24
     >>> fitness(["E", "B", "D", "C", "A"])
     19
+    >>> fitness(["C", "B", "D", "E", "A"])
+    13
     """
     sum = 0
     for i in range(len(genom) - 1):
@@ -63,6 +71,15 @@ def sort(genom_list: list):
     [['A', 'B', 'C', 'D', 'E'], ['E', 'B', 'D', 'C', 'A'], ['A', 'C', 'B', 'D', 'E']]
     """
     genom_list.sort(key=fitness)
+
+def select(genom_list: list):
+    """
+    >>> l = [['A', 'B', 'C', 'D', 'E'], ['C', 'B', 'D', 'E', 'A'], ['E', 'B', 'D', 'C', 'A'], ['A', 'C', 'B', 'D', 'E']]
+    >>> l = select(l)
+    >>> l
+    [['A', 'B', 'C', 'D', 'E'], ['C', 'B', 'D', 'E', 'A']]
+    """
+    return genom_list[:int(0.7 * len(genom_list))]
 
 if __name__ == "__main__":
     import doctest
