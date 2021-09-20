@@ -1,0 +1,26 @@
+{
+    "basic letters": ["A", "B", "C", "D", "E"],
+    "connections":
+    [
+        {
+            "letters": ["A", "B"],
+            "value": 3
+        },
+        {
+            "letters": ["C", "E"],
+            "value": 14
+        },
+        {
+            "letters": ["B", "D"],
+            "value": 8
+        },
+        {
+            "letters": ["C", "A"],
+            "value": 11
+        },
+        {
+            "letters": ["E", "D"],
+            "value": 5
+        }
+    ]
+}
